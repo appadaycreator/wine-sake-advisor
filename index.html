@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ワイン・日本酒診断 | あなたに合うお酒を提案</title>
+  <meta name="description" content="5つの質問であなたに合うワイン・日本酒を診断。好みの味・シーン・予算からおすすめ銘柄カテゴリとフードペアリングを提案します。">
+  <link rel="canonical" href="https://appli-hub.com/wine-sake-advisor/">
+
+  <!-- OGP -->
+  <meta property="og:title" content="ワイン・日本酒診断 | あなたに合うお酒を提案">
+  <meta property="og:description" content="5つの質問であなたに合うワイン・日本酒を診断。好みの味・シーン・予算からおすすめ銘柄カテゴリとフードペアリングを提案します。">
+  <meta property="og:url" content="https://appli-hub.com/wine-sake-advisor/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://appli-hub.com/wine-sake-advisor/ogp.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ワイン・日本酒診断",
+    "description": "好みの味・シーン・予算からワイン・日本酒のおすすめを診断するWebアプリ",
+    "url": "https://appli-hub.com/wine-sake-advisor/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8427583028015858" crossorigin="anonymous"></script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","s3t9vl8h3v");</script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    window.onerror = function(msg, src, line, col, err) {
+      console.error('[ERROR]', msg, src, line, col, err);
+      return false;
+    };
+    window.addEventListener('unhandledrejection', function(e) {
+      console.error('[UNHANDLED REJECTION]', e.reason);
+    });
+  </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- Header -->
+  <header style="background-color:#9f1239;" class="text-white py-4 px-4 shadow-md">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex items-center gap-2">
+        <span class="text-3xl">🍷</span>
+        <div>
+          <h1 class="text-xl font-bold">ワイン・日本酒診断</h1>
+          <p class="text-rose-200 text-sm">5つの質問であなたに合うお酒を提案</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-8">
+
+    <!-- Intro -->
+    <div class="bg-white rounded-2xl shadow p-6 mb-6">
+      <p class="text-gray-600 text-sm leading-relaxed">ワインも日本酒も奥が深く、初心者には選び方が難しいもの。あなたの好みのテイスト・シーン・予算から、<strong style="color:#9f1239;">最適なお酒のカテゴリとフードペアリング</strong>をご提案します。</p>
+    </div>
+
+    <!-- Quiz -->
+    <div id="quiz-section">
+      <div class="bg-white rounded-2xl shadow p-6 mb-4">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-sm font-semibold" style="color:#9f1239;" id="step-label">質問 1 / 5</span>
+          <div class="w-32 bg-gray-200 rounded-full h-2">
+            <div id="progress-bar" class="h-2 rounded-full transition-all duration-300" style="width:20%;background-color:#9f1239;"></div>
+          </div>
+        </div>
+        <div id="question-area"></div>
+      </div>
+
+      <div class="flex gap-3">
+        <button id="prev-btn" onclick="prevStep()" class="hidden flex-1 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition">戻る</button>
+        <button id="next-btn" onclick="nextStep()" class="flex-1 py-3 text-white rounded-xl font-semibold transition" style="background-color:#9f1239;" onmouseover="this.style.backgroundColor='#881337'" onmouseout="this.style.backgroundColor='#9f1239'">次へ</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="result-section" class="hidden">
+      <div class="bg-white rounded-2xl shadow p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4" style="color:#9f1239;">診断結果</h2>
+        <div id="result-content"></div>
+      </div>
+
+      <!-- Affiliate CTAs -->
+      <div class="rounded-2xl p-5 mb-4" style="background-color:#fff1f2;border:1px solid #fda4af;">
+        <h3 class="font-bold mb-2" style="color:#9f1239;">Amazonでワイン・日本酒を探す</h3>
+        <p class="text-sm text-gray-600 mb-3">診断結果のカテゴリに合うお酒をAmazonで検索。レビューと価格を比較してベストな一本を見つけよう。</p>
+        <a href="https://www.amazon.co.jp/s?k=%E3%83%AF%E3%82%A4%E3%83%B3+%E6%97%A5%E6%9C%AC%E9%85%92+%E3%81%AE%E3%81%BF%E6%AF%94%E3%81%B9&tag=appadaycrea0f-22" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold rounded-xl transition mb-2">
+          Amazonでワイン・日本酒を見る
+        </a>
+      </div>
+
+      <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 mb-6">
+        <h3 class="font-bold text-rose-800 mb-2">楽天市場でお酒をまとめ買い</h3>
+        <p class="text-sm text-gray-600 mb-3">楽天市場ではポイント還元率が高く、ケース買いなら送料無料のショップも多数。お気に入りのお酒をまとめてお得に購入。</p>
+        <a href="https://search.rakuten.co.jp/search/mall/%E3%83%AF%E3%82%A4%E3%83%B3+%E6%97%A5%E6%9C%AC%E9%85%92/" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition">
+          楽天市場でお酒を探す
+        </a>
+      </div>
+
+      <button onclick="resetQuiz()" class="w-full py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition mb-6">もう一度診断する</button>
+    </div>
+
+    <!-- AdSense -->
+    <div class="my-6 text-center">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8427583028015858" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Cross-links -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <h3 class="font-bold text-gray-700 mb-3">他の趣味・ライフスタイル診断</h3>
+      <div class="grid grid-cols-1 gap-3">
+        <a href="/coffee-note-app/" class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl hover:border-rose-400 transition">
+          <span class="text-2xl">☕</span>
+          <div><p class="font-semibold text-sm">コーヒーノートアプリ</p><p class="text-xs text-gray-500">好みのコーヒーを記録・探索</p></div>
+        </a>
+        <a href="/travel-style-finder/" class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl hover:border-rose-400 transition">
+          <span class="text-2xl">✈️</span>
+          <div><p class="font-semibold text-sm">旅行スタイル診断</p><p class="text-xs text-gray-500">あなたに合う旅先を提案</p></div>
+        </a>
+        <a href="/gift-memory/" class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl hover:border-rose-400 transition">
+          <span class="text-2xl">🎁</span>
+          <div><p class="font-semibold text-sm">ギフト記録・メモリー</p><p class="text-xs text-gray-500">贈り物の記録と選び方のヒント</p></div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-xs text-gray-400 py-6 mt-4">
+    <p>© 2026 AppliHub | <a href="/privacy/" class="underline">プライバシーポリシー</a></p>
+    <p class="mt-1">※ お酒は20歳以上の方のみお楽しみください。飲酒運転は絶対禁止。</p>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        id: 'type',
+        text: 'お酒の種類の好みを教えてください',
+        type: 'radio',
+        options: ['ワインが好き', '日本酒が好き', 'どちらも好き', 'これから試してみたい']
+      },
+      {
+        id: 'taste',
+        text: '味の好みはどちらですか？',
+        type: 'radio',
+        options: ['甘口・甘い感じが好き', '辛口・キリッとした感じが好き', 'フルーティ・果実感が好き', 'スッキリ・さっぱりしたもの', 'コクが深い・濃厚なもの']
+      },
+      {
+        id: 'scene',
+        text: '飲むシーンはどれですか？',
+        type: 'radio',
+        options: ['毎日の晩酌', '食事に合わせて楽しむ', 'プレゼントや贈り物', '特別な記念日・お祝い']
+      },
+      {
+        id: 'budget',
+        text: '1本あたりの予算はどのくらいですか？',
+        type: 'radio',
+        options: ['1,000円以下', '1,000〜3,000円', '3,000〜10,000円', '10,000円以上']
+      },
+      {
+        id: 'knowledge',
+        text: 'お酒の知識・経験はどのくらいですか？',
+        type: 'radio',
+        options: ['初心者（よくわからない）', '少し知っている（飲んだことはある）', '詳しい（品種・産地を理解している）']
+      }
+    ];
+
+    const recommendations = {
+      wine_sweet_fruit: {
+        category: 'ロゼワイン / 甘口白ワイン',
+        examples: 'ポルトガルのヴィーニョ・ヴェルデ、アルゼンチンのモスカート',
+        pairing: 'フルーツタルト、軽いチーズ、生ハム',
+        desc: '甘みとフルーティさを兼ね備えたお酒が好きな方には、ロゼや甘口白ワインが最適。色も美しくプレゼントにも喜ばれます。'
+      },
+      wine_dry: {
+        category: '辛口赤ワイン（フルボディ）',
+        examples: 'カベルネ・ソーヴィニヨン、シラー、バルベーラ',
+        pairing: '肉料理（ステーキ・ラム）、熟成チーズ、パスタ',
+        desc: 'コクと渋みのある本格的な赤ワインは食事との相性が抜群。大人の晩酌にぴったりです。'
+      },
+      sake_light: {
+        category: '純米吟醸酒 / 大吟醸酒',
+        examples: '獺祭、久保田、八海山、磯自慢',
+        pairing: '刺身・寿司、白身魚、豆腐料理、塩焼き',
+        desc: 'フルーティな香りとスッキリした後味が特徴。日本酒入門としても人気の高い種類です。'
+      },
+      sake_full: {
+        category: '純米酒 / 本醸造酒',
+        examples: '菊正宗、月桂冠 特撰、白鶴 まる',
+        pairing: '煮物、焼き魚、おでん、から揚げ',
+        desc: 'お米の旨みをしっかり感じられるコクのある日本酒。毎日の晩酌におすすめのバリューコスパ銘柄。'
+      },
+      beginner: {
+        category: 'スパークリングワイン / にごり酒',
+        examples: 'プロセッコ、カヴァ、どぶろく、にごり酒',
+        pairing: 'ピザ、揚げ物、フルーツ盛り合わせ',
+        desc: '炭酸のはじける爽快感が飲みやすく、お酒の入門として最適。パーティーシーンでも大活躍。'
+      }
+    };
+
+    function getRecommendation() {
+      const type = answers.type || 'どちらも好き';
+      const taste = answers.taste || 'フルーティ・果実感が好き';
+      const knowledge = answers.knowledge || '初心者（よくわからない）';
+
+      if (knowledge === '初心者（よくわからない）') return recommendations.beginner;
+      if (type === 'ワインが好き' || type === 'どちらも好き') {
+        if (taste === '辛口・キリッとした感じが好き' || taste === 'コクが深い・濃厚なもの') return recommendations.wine_dry;
+        return recommendations.wine_sweet_fruit;
+      }
+      if (type === '日本酒が好き') {
+        if (taste === 'コクが深い・濃厚なもの' || taste === '甘口・甘い感じが好き') return recommendations.sake_full;
+        return recommendations.sake_light;
+      }
+      return recommendations.beginner;
+    }
+
+    let currentStep = 0;
+    let answers = {};
+
+    function renderQuestion() {
+      const q = questions[currentStep];
+      document.getElementById('step-label').textContent = `質問 ${currentStep + 1} / ${questions.length}`;
+      document.getElementById('progress-bar').style.width = `${((currentStep + 1) / questions.length) * 100}%`;
+      document.getElementById('prev-btn').classList.toggle('hidden', currentStep === 0);
+      document.getElementById('next-btn').textContent = currentStep === questions.length - 1 ? '診断する' : '次へ';
+
+      let html = `<p class="font-semibold text-gray-800 mb-4">${q.text}</p><div class="space-y-2">`;
+      q.options.forEach(opt => {
+        const checked = answers[q.id] === opt ? 'checked' : '';
+        html += `<label class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-rose-400 transition has-[:checked]:border-rose-600 has-[:checked]:bg-rose-50">
+          <input type="radio" name="${q.id}" value="${opt}" ${checked} style="accent-color:#9f1239;"> <span class="text-sm">${opt}</span>
+        </label>`;
+      });
+      html += '</div>';
+      document.getElementById('question-area').innerHTML = html;
+    }
+
+    function saveAnswer() {
+      const el = document.querySelector(`input[name="${questions[currentStep].id}"]:checked`);
+      if (!el) return false;
+      answers[questions[currentStep].id] = el.value;
+      return true;
+    }
+
+    function nextStep() {
+      if (!saveAnswer()) { alert('選択してください'); return; }
+      if (currentStep < questions.length - 1) { currentStep++; renderQuestion(); }
+      else showResult();
+    }
+
+    function prevStep() {
+      if (currentStep > 0) { currentStep--; renderQuestion(); }
+    }
+
+    function showResult() {
+      document.getElementById('quiz-section').classList.add('hidden');
+      document.getElementById('result-section').classList.remove('hidden');
+
+      const rec = getRecommendation();
+      const sceneMap = {
+        '毎日の晩酌': '手頃な価格でリラックスタイムに',
+        '食事に合わせて楽しむ': '食中酒として料理を引き立てる',
+        'プレゼントや贈り物': '高級感のある見た目にもこだわって',
+        '特別な記念日・お祝い': 'プレミアムな一本で特別感を演出'
+      };
+      const sceneAdvice = sceneMap[answers.scene] || '';
+      const budgetNote = answers.budget === '1,000円以下' ? 'コスパ重視ならスーパーやコンビニでも見つかります。' :
+                         answers.budget === '1,000〜3,000円' ? '中価格帯はコスパと品質のバランスが最高の激戦区です。' :
+                         answers.budget === '3,000〜10,000円' ? '専門店やオンラインショップで個性豊かな一本を探しましょう。' :
+                         '百貨店や酒専門店でソムリエ・蔵人に相談するのがおすすめです。';
+
+      document.getElementById('result-content').innerHTML = `
+        <div class="border-l-4 rounded-xl p-4 mb-4" style="background-color:#fff1f2;border-color:#9f1239;">
+          <p class="text-sm font-semibold mb-1" style="color:#9f1239;">あなたへのおすすめ</p>
+          <p class="text-2xl font-bold" style="color:#9f1239;">${rec.category}</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-4 mb-3">
+          <p class="text-sm font-semibold text-gray-700 mb-1">代表的な銘柄・種類</p>
+          <p class="text-sm text-gray-600">${rec.examples}</p>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-3">
+          <p class="text-sm font-semibold text-amber-800 mb-1">フードペアリング</p>
+          <p class="text-sm text-amber-700">🍽️ ${rec.pairing}</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-4 mb-3">
+          <p class="text-sm font-semibold text-gray-700 mb-1">選んだ理由</p>
+          <p class="text-sm text-gray-600">${rec.desc}</p>
+        </div>
+        <div class="rounded-xl p-3" style="background-color:#fdf2f8;">
+          <p class="text-xs font-semibold mb-1" style="color:#9f1239;">シーン別アドバイス</p>
+          <p class="text-xs text-gray-600">${sceneAdvice}</p>
+          <p class="text-xs text-gray-600 mt-1">${budgetNote}</p>
+        </div>`;
+    }
+
+    function resetQuiz() {
+      currentStep = 0; answers = {};
+      document.getElementById('quiz-section').classList.remove('hidden');
+      document.getElementById('result-section').classList.add('hidden');
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
