@@ -4,7 +4,7 @@
   "description": "味の好み・料理・予算からあなたに合うワインや日本酒を無料診断。ギフト選びにも役立つ。",
   "start_url": "/wine-sake-advisor/",
   "display": "standalone",
-  "background_color": "#f8faf9",
+  "background_color": "#ffffff",
   "theme_color": "#7c3aed",
   "lang": "ja",
   "icons": [
